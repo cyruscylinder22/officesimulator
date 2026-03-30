@@ -1,6 +1,6 @@
 [
 null,
-{"id":1,"atypeId":1,"description":"","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"-----Armors","note":"","params":[0,0,0,1,0,0,0,0],"price":100},
+{"id":1,"atypeId":0,"description":"","etypeId":0,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"-----Armors","note":"","params":[0,0,0,1,0,0,0,0],"price":100},
 {"id":2,"atypeId":1,"description":"[General Equipment] Linen clothing with high\nbreathability.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Linen Clothing","note":"","params":[0,0,0,1,0,0,0,0],"price":100},
 {"id":3,"atypeId":1,"description":"[General Equipment] A vest made of tanned hide.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Leather Vest","note":"","params":[0,0,0,3,0,0,0,0],"price":200},
 {"id":4,"atypeId":1,"description":"[General Equipment] Durable clothing that can\nwithstand rough travels.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Adventurer’s Clothing","note":"","params":[0,0,0,7,0,0,0,0],"price":550},
