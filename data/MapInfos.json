@@ -1,18 +1,18 @@
 [
 null,
-{"id":1,"expanded":true,"name":"Level 4","order":6,"parentId":0,"scrollX":2682.8571428571427,"scrollY":1601.142857142857,"quick":false},
-{"id":2,"expanded":true,"name":"Level 7","order":9,"parentId":0,"scrollX":1890,"scrollY":1550,"quick":false},
-{"id":3,"expanded":true,"name":"Level 9","order":11,"parentId":0,"scrollX":1650.6666666666667,"scrollY":2893.3333333333335,"quick":false},
-{"id":4,"expanded":true,"name":"Level 2","order":4,"parentId":0,"scrollX":2476,"scrollY":1524,"quick":false},
-{"id":5,"expanded":true,"name":"Level 8","order":10,"parentId":0,"scrollX":2808,"scrollY":1839.4285714285713,"quick":false},
-{"id":6,"expanded":false,"name":"Level 0","order":2,"parentId":0,"scrollX":2476,"scrollY":1940,"quick":false},
+{"id":1,"expanded":true,"name":"Level 4","order":6,"parentId":0,"scrollX":2682,"scrollY":1602,"quick":false},
+{"id":2,"expanded":true,"name":"Level 7","order":9,"parentId":0,"scrollX":1890,"scrollY":1551,"quick":false},
+{"id":3,"expanded":true,"name":"Level 9","order":11,"parentId":0,"scrollX":1857,"scrollY":2892,"quick":false},
+{"id":4,"expanded":true,"name":"Level 2","order":4,"parentId":0,"scrollX":2701.090909090909,"scrollY":2011.6363636363637,"quick":false},
+{"id":5,"expanded":true,"name":"Level 8","order":10,"parentId":0,"scrollX":2214.8571428571427,"scrollY":1117.7142857142856,"quick":false},
+{"id":6,"expanded":false,"name":"Level 0","order":2,"parentId":0,"scrollX":2701.090909090909,"scrollY":2120.727272727273,"quick":false},
 {"id":7,"expanded":true,"name":"Level 15","order":14,"parentId":0,"scrollX":1492,"scrollY":1000,"quick":false},
-{"id":8,"expanded":true,"name":"Level 1","order":3,"parentId":0,"scrollX":2476,"scrollY":2140,"quick":false},
+{"id":8,"expanded":true,"name":"Level 1","order":3,"parentId":0,"scrollX":2313,"scrollY":2184,"quick":false},
 {"id":9,"expanded":true,"name":"Level 10","order":12,"parentId":0,"scrollX":2476.3636363636365,"scrollY":2179.6363636363635,"quick":false},
-{"id":10,"expanded":true,"name":"Level 5","order":7,"parentId":0,"scrollX":1238,"scrollY":1748,"quick":false},
+{"id":10,"expanded":true,"name":"Level 5","order":7,"parentId":0,"scrollX":2701.090909090909,"scrollY":1749.818181818182,"quick":false},
 {"id":11,"expanded":true,"name":"Level 6","order":8,"parentId":0,"scrollX":2193,"scrollY":2049,"quick":false},
 {"id":12,"expanded":true,"name":"Level Base","order":15,"parentId":0,"scrollX":2372,"scrollY":2540,"quick":false},
 {"id":13,"expanded":true,"name":"Level 11","order":13,"parentId":0,"scrollX":2477.3333333333335,"scrollY":1906.6666666666667,"quick":false},
-{"id":14,"expanded":true,"name":"Level 3","order":5,"parentId":0,"scrollX":2472.8888888888887,"scrollY":2312,"quick":false},
-{"id":15,"expanded":false,"name":"Intro","order":1,"parentId":0,"scrollX":742.8,"scrollY":410.4,"quick":false}
+{"id":14,"expanded":true,"name":"Level 3","order":5,"parentId":0,"scrollX":2468.5714285714284,"scrollY":1182.857142857143,"quick":false},
+{"id":15,"expanded":false,"name":"Intro","order":1,"parentId":0,"scrollX":1485.6,"scrollY":820.8,"quick":false}
 ]
