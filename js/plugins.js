@@ -7,5 +7,6 @@ var $plugins =
 {"name":"GALV_CharacterFramesMZ","status":true,"description":"Enables map character sheets to have more frames per character.","parameters":{"fSpeedMod":"f * 0.8","fileSymbol":"%"}},
 {"name":"GALV_PuzzleFunctionsMZ","status":false,"description":"(v.1.1) A bunch of functions to use to make eventing puzzles easier\r\nView the plugin \"Help\" to view available commands.","parameters":{}},
 {"name":"IceSlide","status":true,"description":"Ice Slide: Plays exactly 3 animation frames, then stays static.","parameters":{"IceTerrainTag":"2"}},
-{"name":"SlidingPuzzle","status":true,"description":"4x4 Sliding Puzzle - High Priority Click Logic.","parameters":{"StartX":"24","StartY":"28","WinSwitch":"24"}}
+{"name":"SlidingPuzzle","status":true,"description":"4x4 Sliding Puzzle - High Priority Click Logic.","parameters":{"StartX":"24","StartY":"28","WinSwitch":"24"}},
+{"name":"QuicksandSystem","status":true,"description":"Smooth 5px Quicksand: Visual cropping with Global Terrain Tags.","parameters":{"DefaultRegions":"[\"3\"]","DefaultTerrains":"[\"3\"]","DamageAmount":"50"}}
 ];
