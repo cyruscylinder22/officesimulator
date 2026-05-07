@@ -11,5 +11,6 @@ var $plugins =
 {"name":"QuicksandSystem","status":true,"description":"Smooth 5px Quicksand: Visual cropping with Global Terrain Tags.","parameters":{"DefaultRegions":"[\"3\"]","DefaultTerrains":"[\"3\"]","DamageAmount":"50"}},
 {"name":"ScreenZoom","status":true,"description":"[Ver1.1.1]Zoom screen whose center is specified character or player.","parameters":{}},
 {"name":"TallSpriteRegionFix","status":true,"description":"Boosts Sprite Z-Priority based on Region ID or Terrain Tag.","parameters":{"BoostRegionId":"0","BoostTerrainTag":"7"}},
-{"name":"HintAnimation","status":true,"description":"Plays hint animation with a solid text box and a 5-second auto-hide timer.","parameters":{"progressVariableId":"9","successHints":"[\"Try speaking to the different people on the front desk.\",\"Your interview room is on level 1.\"]"}}
+{"name":"HintAnimation","status":true,"description":"Plays hint animation with a solid text box and a 5-second auto-hide timer.","parameters":{"progressVariableId":"9","successHints":"[\"Try speaking to the different people on the front desk.\",\"Your interview room is on level 1.\"]"}},
+{"name":"VisualArmorSystem","status":true,"description":"Intelligent Sprite Changer: Detects single ($) vs. multi-sheets and toggles switches.","parameters":{"Equipment Map":"[\"{\\\"ArmorId\\\":\\\"3\\\",\\\"SpriteName\\\":\\\"$maincharactercycle\\\",\\\"SpriteIndex\\\":\\\"0\\\",\\\"SwitchId\\\":\\\"7\\\"}\"]"}}
 ];
