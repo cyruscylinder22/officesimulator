@@ -1,6 +1,6 @@
 /*:
  * @target MZ
- * @plugindesc Boosts Sprite Z-Priority based on Region ID or Terrain Tag.
+ * @plugindesc Boosts Sprite Z-Priority based on Region ID or Terrain Tag without breaking event layering.
  * @author Gemini
  * 
  * @param BoostRegionId
@@ -41,16 +41,16 @@
             const currentRegion = $gameMap.regionId(charX, charY);
             const currentTerrain = $gameMap.terrainTag(charX, charY);
 
-            // Check if either the Region ID or the Terrain Tag matches
             const isRegionMatch = boostRegionId > 0 && currentRegion === boostRegionId;
             const isTerrainMatch = boostTerrainTag > 0 && currentTerrain === boostTerrainTag;
 
             if (isRegionMatch || isTerrainMatch) {
-                // Priority 5 sits above the Star layer
+                // Force boost above tiles and standard events
                 this.z = 5; 
             } else {
-                // Reset to standard character priority
-                this.z = 3;
+                // Use the character's natural screenZ instead of a hardcoded 3
+                // This allows the engine to sort the player vs events correctly
+                this.z = this._character.screenZ();
             }
         }
     };
