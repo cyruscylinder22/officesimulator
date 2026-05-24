@@ -1,22 +1,19 @@
 /*:
  * @target MZ
- * @plugindesc v5.6 - Loading fade sequence with bottom-left text and random direction row option.
+ * @plugindesc v5.9 - Loading fade sequence with bottom-left text and random direction row option (Menu Skip Overhaul).
  * @author Gemini
- * 
- * @param Default File Name
+ * * @param Default File Name
  * @type file
  * @dir img/characters/
  * @desc The character image file to use by default (do not include extension).
  * @default Actor1
- * 
- * @param Default Index
+ * * @param Default Index
  * @type number
  * @min 0
  * @max 7
  * @desc The index of the sprite on the sheet (0-7 for 8-char sheets. 0 for $big sheets).
  * @default 0
- * 
- * @param Default Direction Row
+ * * @param Default Direction Row
  * @type select
  * @option Random Direction
  * @value -1
@@ -30,84 +27,70 @@
  * @value 3
  * @desc Select which row of the sprite sheet to use. "Random Direction" chooses a new row each load screen.
  * @default 2
- * 
- * @param Loading Text
+ * * @param Loading Text
  * @type string
  * @desc The text to display in the bottom-left corner of the screen. Leave blank for no text.
  * @default Now Loading...
- * 
- * @param Font Size
+ * * @param Font Size
  * @type number
  * @min 1
  * @desc The size of the loading text in pixels.
  * @default 28
- * 
- * @param Minimum Display Time
+ * * @param Minimum Display Time
  * @type number
  * @min 0
  * @decimals 1
  * @desc The minimum number of seconds the loading screen black backdrop must stay active.
  * @default 2.0
- * 
- * @param Sprite Fade Speed
+ * * @param Sprite Fade Speed
  * @type number
  * @min 1
  * @desc How many frames it takes for the character sprite and text to fade away.
  * @default 20
- * 
- * @param Screen Fade Speed
+ * * @param Screen Fade Speed
  * @type number
  * @min 1
  * @desc How many frames it takes for the black background to fade away afterward.
  * @default 30
- * 
- * @param Animation Speed
+ * * @param Animation Speed
  * @type number
  * @desc How fast the character walks. Lower is faster (e.g., 6 is normal, 12 is slow).
  * @default 6
- * 
- * @param Scale
+ * * @param Scale
  * @type number
  * @decimals 1
  * @desc The scale of the sprite. 1.0 is normal size, 2.0 is double size.
  * @default 1.5
- * 
- * @help ELI_LoadingAnimation.js
+ * * @help ELI_LoadingAnimation.js
  * ============================================================================
  * This plugin creates a sequential fade sequence: First the character and text 
  * fade out into the black screen, then the black screen fades into the game map.
- * 
- * Setting Direction Row to -1 (Random) will dynamically pick a new direction
+ * * Setting Direction Row to -1 (Random) will dynamically pick a new direction
  * row every time the loading screen appears.
  * ============================================================================
- * 
- * PLUGIN COMMANDS:
- * 
- *   ChangeLoadingSprite
- *     Changes the file, index, and direction row mid-game.
+ * * PLUGIN COMMANDS:
+ * * ChangeLoadingSprite
+ * Changes the file, index, and direction row mid-game.
  */
 
 /*~struct~Dummy:
  * @command ChangeLoadingSprite
  * @text Change Loading Sprite
  * @desc Changes the character sheet, index, and direction shown on the loading screen.
- * 
- * @arg fileName
+ * * @arg fileName
  * @type file
  * @dir img/characters/
  * @text File Name
  * @desc Select the character sheet file.
  * @default Actor1
- * 
- * @arg index
+ * * @arg index
  * @type number
  * @min 0
  * @max 7
  * @text Character Index
  * @desc The position on the sheet (0-7). Use 0 for single $character sheets.
  * @default 0
- * 
- * @arg directionRow
+ * * @arg directionRow
  * @type select
  * @text Direction Row
  * @option Random Direction
@@ -152,12 +135,46 @@
     let spriteOpacity = 1.0;
     let screenOpacity = 1.0;
     let isCustomLoadingActive = false;
-    let activeDirectionRow = 2; // Real direction row selected for the current instance
+    let activeDirectionRow = 2;
 
-    function isMenuSceneActive() {
-        if (typeof SceneManager === 'undefined' || !SceneManager._scene) return false;
-        const currentScene = SceneManager._scene;
-        return currentScene instanceof Scene_MenuBase;
+    // Direct tracking flags for menu context transitions
+    let isMenuTransitionInProgress = false;
+
+    // Track when the SceneManager pushes a new scene or pops one
+    const _SceneManager_push = SceneManager.push;
+    SceneManager.push = function(sceneClass) {
+        if (sceneClass && sceneClass.prototype instanceof Scene_MenuBase) {
+            isMenuTransitionInProgress = true;
+        }
+        _SceneManager_push.call(this, sceneClass);
+    };
+
+    const _SceneManager_pop = SceneManager.pop;
+    SceneManager.pop = function() {
+        if (this._scene && this._scene instanceof Scene_MenuBase) {
+            isMenuTransitionInProgress = true;
+        }
+        _SceneManager_pop.call(this);
+    };
+
+    // Reset our blocker flag whenever the scene stabilizes completely
+    const _SceneManager_onSceneStart = SceneManager.onSceneStart;
+    SceneManager.onSceneStart = function() {
+        _SceneManager_onSceneStart.call(this);
+        isMenuTransitionInProgress = false;
+    };
+
+    function isMenuContextActive() {
+        if (typeof SceneManager === 'undefined') return false;
+        
+        // If an explicit menu transition flag was set by push/pop actions
+        if (isMenuTransitionInProgress) return true;
+
+        // Current or upcoming scenes fall under menu categories
+        if (SceneManager._scene && SceneManager._scene instanceof Scene_MenuBase) return true;
+        if (SceneManager._nextScene && SceneManager._nextScene instanceof Scene_MenuBase) return true;
+
+        return false;
     }
 
     // Track chosen Sprite data safely
@@ -209,7 +226,8 @@
             this._loadingSpinner.style.display = "none";
         }
 
-        if (isMenuSceneActive()) {
+        // Hard blocker check for any menu context
+        if (isMenuContextActive()) {
             isCustomLoadingActive = false;
             return;
         }
@@ -226,7 +244,6 @@
         const configuredRow = hasGameSystem ? $gameSystem.loadingSpriteDirectionRow() : defaultDirectionRow;
         
         if (configuredRow === -1) {
-            // Pick a random row between 0 and 3
             activeDirectionRow = Math.floor(Math.random() * 4);
         } else {
             activeDirectionRow = configuredRow;
@@ -394,7 +411,6 @@
             const currentFrame = patternMapping[currentPattern];
 
             const sx = ((index % 4) * 3 + currentFrame) * pw;
-            // Uses the pre-calculated random or manual active row index
             const sy = (Math.floor(index / 4) * 4 + activeDirectionRow) * ph;
 
             const destW = pw * spriteScale;
