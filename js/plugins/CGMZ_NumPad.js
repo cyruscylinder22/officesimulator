@@ -460,19 +460,21 @@ CGMZ_Window_NumPad_NumberSelect.prototype.initialize = function(rect, opts) {
 	this.refresh();
 };
 //-----------------------------------------------------------------------------
-// Touch input single-tap processing override
+// Fixed Touch input single-tap processing override
 //-----------------------------------------------------------------------------
-const alias_CGMZ_NumPad_Window_NumberSelect_processTouch = CGMZ_Window_NumPad_NumberSelect.prototype.processTouch;
 CGMZ_Window_NumPad_NumberSelect.prototype.processTouch = function() {
-    if (this.isOpenAndActive() && TouchInput.isTriggered() && this.isHoverEnabled()) {
-        const hitIndex = this.hitIndex();
-        if (hitIndex >= 0 && this.isIndexEnabled(hitIndex)) {
-            this.select(hitIndex);
-            this.processOk();
-            return;
-        }
-    }
-    alias_CGMZ_NumPad_Window_NumberSelect_processTouch.call(this);
+	if (this.isOpenAndActive() && TouchInput.isTriggered()) {
+		const x = TouchInput.x;
+		const y = TouchInput.y;
+		const hitIndex = this.hitIndexFor(x, y);
+		if (hitIndex >= 0 && this.isIndexEnabled(hitIndex)) {
+			this.select(hitIndex);
+			this.processOk();
+			TouchInput.clear();
+			return;
+		}
+	}
+	Window_Selectable.prototype.processTouch.call(this);
 };
 //-----------------------------------------------------------------------------
 // Max columns
