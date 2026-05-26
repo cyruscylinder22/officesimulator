@@ -464,9 +464,7 @@ CGMZ_Window_NumPad_NumberSelect.prototype.initialize = function(rect, opts) {
 //-----------------------------------------------------------------------------
 CGMZ_Window_NumPad_NumberSelect.prototype.processTouch = function() {
 	if (this.isOpenAndActive() && TouchInput.isTriggered()) {
-		const x = TouchInput.x;
-		const y = TouchInput.y;
-		const hitIndex = this.hitIndexFor(x, y);
+		const hitIndex = this.hitIndex();
 		if (hitIndex >= 0 && this.isIndexEnabled(hitIndex)) {
 			this.select(hitIndex);
 			this.processOk();
