@@ -7,6 +7,8 @@
  * @plugindesc Number input processing that looks like a phone numpad
  * @help
  * ============================================================================
+ * NOTICE: Updated 26.05.26 for touch screen devices (Single-tap selection).
+ * ============================================================================
  * For terms and conditions using this plugin in your game please visit:
  * https://www.caspergaming.com/terms-of-use/
  * ============================================================================
@@ -26,8 +28,7 @@
  * Documentation:
  * ----------------------------Plugin Commands---------------------------------
  * This plugin supports the following plugin commands:
- * 
- * • Call Scene
+ * * • Call Scene
  * Calls the numpad scene, see further documentation below.
  * -----------------------------Calling Scene----------------------------------
  * Calling the numpad scene with number=true will lose leading 0s. This means
@@ -52,8 +53,7 @@
  * call, which will cause numbers the player enters to be obscured with an
  * asterisk. This can help mimic things like inputting a private PIN or other
  * number that you want to be private.
- * 
- * Version 1.2.0
+ * * Version 1.2.0
  * - Added private number option
  *
  * @command Call Scene
@@ -458,6 +458,21 @@ CGMZ_Window_NumPad_NumberSelect.prototype.initialize = function(rect, opts) {
 	this.select(0);
 	this.activate();
 	this.refresh();
+};
+//-----------------------------------------------------------------------------
+// Touch input single-tap processing override
+//-----------------------------------------------------------------------------
+const alias_CGMZ_NumPad_Window_NumberSelect_processTouch = CGMZ_Window_NumPad_NumberSelect.prototype.processTouch;
+CGMZ_Window_NumPad_NumberSelect.prototype.processTouch = function() {
+    if (this.isOpenAndActive() && TouchInput.isTriggered() && this.isHoverEnabled()) {
+        const hitIndex = this.hitIndex();
+        if (hitIndex >= 0 && this.isIndexEnabled(hitIndex)) {
+            this.select(hitIndex);
+            this.processOk();
+            return;
+        }
+    }
+    alias_CGMZ_NumPad_Window_NumberSelect_processTouch.call(this);
 };
 //-----------------------------------------------------------------------------
 // Max columns
