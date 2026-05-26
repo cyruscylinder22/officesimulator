@@ -106,11 +106,11 @@
  *
  * @arg Select Window Settings
  * @parent Integrations
- * @desc [CGMZ] Scene Settings preset id to use for this scene call - select window
+ * @desc [CGMZ] Scene Settings id to use for this scene call - select window
  *
  * @arg Current Window Settings
  * @parent Integrations
- * @desc [CGMZ] Scene Settings preset id to use for this scene call - current number window
+ * @desc [CGMZ] Scene Settings id to use for this scene call - current number window
  *
  * @param Scene Options
  *
@@ -466,18 +466,18 @@ CGMZ_Window_NumPad_NumberSelect.prototype.processTouch = function() {
 	if (this.isOpenAndActive() && TouchInput.isTriggered()) {
 		const hitIndex = this.hitIndex();
 		if (hitIndex >= 0) {
-			const lastIndex = this.index();
 			this.select(hitIndex);
 			if (this.isCurrentItemEnabled()) {
 				this.processOk();
-			} else {
-				this.select(lastIndex);
 			}
 			TouchInput.clear();
 			return;
 		}
 	}
-	Window_Selectable.prototype.processTouch.call(this);
+	// Fallback to standard mouse tracking only if TouchInput wasn't triggered
+	if (this.isOpenAndActive() && typeof this.updateTouchInput === "function") {
+		this.updateTouchInput();
+	}
 };
 //-----------------------------------------------------------------------------
 // Max columns
