@@ -465,9 +465,14 @@ CGMZ_Window_NumPad_NumberSelect.prototype.initialize = function(rect, opts) {
 CGMZ_Window_NumPad_NumberSelect.prototype.processTouch = function() {
 	if (this.isOpenAndActive() && TouchInput.isTriggered()) {
 		const hitIndex = this.hitIndex();
-		if (hitIndex >= 0 && this.isIndexEnabled(hitIndex)) {
+		if (hitIndex >= 0) {
+			const lastIndex = this.index();
 			this.select(hitIndex);
-			this.processOk();
+			if (this.isCurrentItemEnabled()) {
+				this.processOk();
+			} else {
+				this.select(lastIndex);
+			}
 			TouchInput.clear();
 			return;
 		}
