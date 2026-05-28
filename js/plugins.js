@@ -29,5 +29,6 @@ var $plugins =
 {"name":"MZ_RegionRestrictNPC","status":true,"description":"Restricts NPC movement to specific Region IDs using a note tag.","parameters":{}},
 {"name":"AutoTimedDoors","status":true,"description":"Automatic timed doors that open on player touch and close after 2 seconds.","parameters":{"enableSound":"false","doorSound":"{\"name\":\"Open1\",\"volume\":\"90\",\"pitch\":\"100\",\"pan\":\"0\"}"}},
 {"name":"NPC_ImpassableRegion","status":true,"description":"v1.0.0 - Prevents NPCs/Events from walking onto specific Region tiles while allowing the player through.","parameters":{"ImpassableRegionId":"250"}},
-{"name":"GmodDev_QuestLog-Full","status":true,"description":"Quest Log Plugin Full - Managed quests with interactive popups, hints, and dynamic updates (Popup Confirm Delay Fix)","parameters":{"MenuButtonIcon":"0","HintFaceImage":"Foofoo Face","HintFaceIndex":"3","PopupOpacity":"255","PopupDelay":"120"}}
+{"name":"GmodDev_QuestLog-Full","status":true,"description":"Quest Log Plugin Full - Managed quests with interactive popups, hints, and dynamic updates (Popup Confirm Delay Fix)","parameters":{"MenuButtonIcon":"0","HintFaceImage":"Foofoo Face","HintFaceIndex":"3","PopupOpacity":"255","PopupDelay":"120"}},
+{"name":"RaceSystem","status":true,"description":"A complete racing system to pit the player against an NPC with anti-cheat checkpoints.","parameters":{}}
 ];
